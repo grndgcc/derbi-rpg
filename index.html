@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derbi RPG: Galatasaray vs Fenerbahçe</title>
+    <!-- Adım 2'de yazacağımız CSS dosyasını bağlıyoruz -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-wrapper">
+        
+        <!-- Arayüz (UI) Katmanı -->
+        <div id="ui-layer">
+            
+            <!-- Başlangıç Seçim Ekranı -->
+            <div id="start-menu">
+                <h1>DERBİ RPG</h1>
+                <p class="subtitle">Mörk Borg Taktiksel Futbol Sistemi</p>
+                
+                <div class="selection-container">
+                    <div class="team-selection">
+                        <h3>Takımını Seç</h3>
+                        <button id="btn-gs" class="team-btn gs-colors">Galatasaray</button>
+                        <button id="btn-fb" class="team-btn fb-colors">Fenerbahçe</button>
+                    </div>
+                    
+                    <!-- Takım seçilince JS ile görünür olacak -->
+                    <div id="player-selection-box" class="player-selection hidden">
+                        <h3>Kontrol Edeceğin Oyuncuyu Seç</h3>
+                        <select id="player-select">
+                            <option value="">Önce takım seçiniz...</option>
+                            <!-- Seçenekler data.js'den dinamik gelecek -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Karakter seçilince JS ile görünür olacak -->
+                <button id="btn-start" class="start-btn hidden">Maça Başla</button>
+            </div>
+
+            <!-- Skor Tabelası (Oyun başladığında görünür olacak) -->
+            <div id="scoreboard" class="hidden">
+                <div class="team-score">
+                    <span id="score-home-name">GS</span>
+                    <span id="score-home">0</span>
+                </div>
+                <div class="match-time" id="match-timer">00:00</div>
+                <div class="team-score">
+                    <span id="score-away">0</span>
+                    <span id="score-away-name">FB</span>
+                </div>
+            </div>
+
+            <!-- Zar sisteminin çalıştığını test/görmek için oyun içi anlık bildirim alanı (Sadece eylem isimleri yazar, arkadaki zar değerini gizleriz) -->
+            <div id="action-log" class="hidden">
+                <p id="log-text"></p>
+            </div>
+
+        </div>
+
+        <!-- GPU ile çizim yapılacak Futbol Sahası -->
+        <canvas id="gameCanvas"></canvas>
+
+    </div>
+
+    <!-- Adım 10'da yazacağımız Ana JS Motoru (Diğer tüm JS'leri bu yükleyecek) -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+/* --- TEMEL AYARLAR --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Mörk Borg'un o kuralcı ve karanlık RPG havasını vermek için monospace (daktilo) fontu */
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Scroll çubuklarını gizler */
+    background-color: #111; /* Çim zemin yüklenene kadar simsiyah ekran */
+    color: #fff;
+}
+
+#game-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- OYUN ALANI (GPU ÇİZİM YERİ) --- */
+#gameCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Arayüzün altında kalacak */
+    display: block;
+}
+
+/* --- ARAYÜZ KATMANI (UI) --- */
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Canvas'ın üstünde kalacak */
+    pointer-events: none; /* Arayüzdeki boşluklardan tıklamaların Canvas'a geçmesini sağlar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* UI içindeki tıklanabilir elemanların tekrar etkileşime açılması */
+#start-menu, #scoreboard, #action-log {
+    pointer-events: auto; 
+}
+
+/* --- BAŞLANGIÇ MENÜSÜ --- */
+#start-menu {
+    background-color: #000;
+    border: 4px solid #fff;
+    padding: 40px;
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 10px 10px 0px #fff; /* Keskin, Mörk Borg tarzı gölge */
+}
+
+#start-menu h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.selection-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* --- TAKIM SEÇİM BUTONLARI --- */
+.team-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid transparent;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+/* Galatasaray Renkleri */
+.gs-colors {
+    background-color: #A32638; /* Parçalı Kırmızı */
+    color: #FDB913; /* Parçalı Sarı */
+    border-color: #FDB913;
+}
+.gs-colors:hover {
+    background-color: #FDB913;
+    color: #A32638;
+    border-color: #A32638;
+}
+
+/* Fenerbahçe Renkleri */
+.fb-colors {
+    background-color: #001E61; /* Lacivert */
+    color: #FFED00; /* Sarı */
+    border-color: #FFED00;
+}
+.fb-colors:hover {
+    background-color: #FFED00;
+    color: #001E61;
+    border-color: #001E61;
+}
+
+/* --- OYUNCU SEÇİMİ --- */
+.player-selection h3 {
+    margin-bottom: 10px;
+}
+
+#player-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    background-color: #222;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+/* --- MAÇA BAŞLA BUTONU --- */
+.start-btn {
+    background-color: #fff;
+    color: #000;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.2s;
+}
+
+.start-btn:hover {
+    background-color: #ff003c; /* Agresif bir hover rengi */
+    color: #fff;
+}
+
+/* --- SKOR TABELASI --- */
+#scoreboard {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    gap: 30px;
+}
+
+.match-time {
+    color: #00ff00; /* Dijital saat yeşili */
+    font-size: 1.5rem;
+}
+
+/* --- EYLEM GÜNLÜĞÜ (RPG HİSSİ İÇİN) --- */
+#action-log {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #ffcc00;
+    text-transform: uppercase;
+    min-width: 300px;
+    text-align: center;
+}
+
+/* Gizleme Sınıfı */
+.hidden {
+    display: none !important;
+}
